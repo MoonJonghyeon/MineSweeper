@@ -81,21 +81,21 @@ export default {
             if(this.halted) {
                 return;
             }
-            switch (this.tableData[row][cell]) {
-                case CODE.NORMAL:
-                case CODE.MINE:
-                    this.$store.commit(FLAG_CELL, { row, cell });
-                    return;
-                case CODE.FLAG_MINE:
-                case CODE.FLAG:
-                    this.$store.commit(QUESTION_CELL, {  row, cell });
-                    return;
-                case CODE.QUESTION_MINE:
-                case CODE.QUESTION:
-                    this.$store.commit(NORMALIZE_CELL, { row, cell });
-                    return;
+            // switch (this.tableData[row][cell]) {
+            //     case CODE.NORMAL:
+            //     case CODE.MINE:
+            //         this.$store.commit(FLAG_CELL, { row, cell });
+            //         return;
+            //     case CODE.FLAG_MINE:
+            //     case CODE.FLAG:
+            //         this.$store.commit(QUESTION_CELL, {  row, cell });
+            //         return;
+            //     case CODE.QUESTION_MINE:
+            //     case CODE.QUESTION:
+            //         this.$store.commit(NORMALIZE_CELL, { row, cell });
+            //         return;
 
-            }
+            // }
         }
     }
 }
