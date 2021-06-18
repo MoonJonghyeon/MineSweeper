@@ -23,7 +23,7 @@ export default {
         ...mapState(['tableData', 'halted']),
         cellDataStyle() {
             return (row, cell) => {
-            switch (this.$store.state.tableData[row][cell]) {
+            switch (this.tableData[row][cell]) {
                 case CODE.NORMAL:
                 case CODE.MINE:
                     return {
@@ -51,7 +51,7 @@ export default {
         },
         cellDataText() {
             return (row, cell) => {
-            switch (this.$store.state.tableData[row][cell]) {
+            switch (this.tableData[row][cell]) {
                 case CODE.MINE:
                     return 'X';
                 case CODE.NORMAL:
@@ -88,7 +88,7 @@ export default {
                     return;
                 case CODE.FLAG_MINE:
                 case CODE.FLAG:
-                    this.$store.commit(QUESTION_CELL, {  row, cell });
+                    this.$store.commit(QUESTION_CELL, { row, cell });
                     return;
                 case CODE.QUESTION_MINE:
                 case CODE.QUESTION:
