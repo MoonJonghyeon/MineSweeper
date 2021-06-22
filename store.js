@@ -78,7 +78,7 @@ export default new Vuex.Store({
         },
         [OPEN_CELL](state, {row, cell}) {
             const checked = [];
-            function checkAround() { //주변 8칸 지뢰있는지 검색
+            function checkAround(row, cell) { //주변 8칸 지뢰있는지 검색
             const checkUndefined = row < 0 || row >= state.tableData.length || cell < 0 || cell >= state.tableData[0].length;
             if (checkUndefined) {
                 return;
@@ -87,11 +87,9 @@ export default new Vuex.Store({
                 return;
             }
             if(checked.includes(row + '/' + cell)) { //연칸이면 종료
-                console.log(checked)
                 return;
             } else {
                 checked.push(row + '/' + cell); //연칸이 아니면 열면서 기록
-                console.log(checked)
             }
             let around = [];
             if(state.tableData[row - 1]) {
