@@ -61,6 +61,7 @@ export default new Vuex.Store({
         timer: 0,
         halted: true,
         result: '',
+        openCount: 0,
     }, //data
     getters: {
         
@@ -77,6 +78,7 @@ export default new Vuex.Store({
             state.halted = false;
         },
         [OPEN_CELL](state, {row, cell}) {
+            let openCount = 0;
             const checked = [];
             function checkAround(row, cell) { //주변 8칸 지뢰있는지 검색
             const checkUndefined = row < 0 || row >= state.tableData.length || cell < 0 || cell >= state.tableData[0].length;
@@ -124,13 +126,28 @@ export default new Vuex.Store({
                 }
                 near.forEach((n) => {
                     if(state.tableData[n[0]][n[1]] !== CODE.OPENED) {
+                        // console.log([n[0]], [n[1]]);
+                        // console.log(near);
                         checkAround(n[0], n[1]);
-                    } 
+                    }
                 })
+            }
+            if(state.tableData[row][cell] === CODE.NORMAL) {
+                openCount += 1;
             }
             Vue.set(state.tableData[row], cell, counted.length);
             }
             checkAround(row, cell);
+            let halted = false;
+            let result = '';
+            if(state.data.row * state.data.cell - state.data.mine === state.openCount + openCount) {
+                halted = true;
+                result = `${state.timer}초만에 승리하셨습니다.`;
+                // console.log(state.timer);
+            }
+            state.openCount += openCount;
+            state.halted = halted;
+            state.result = result;
         },
         [CLICK_MINE](state, {row, cell}) {
             state.halted = true;
